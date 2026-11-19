@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 
-// Prefixa arquivos de /public com o base path (GitHub Pages serve em /lp-pedro/)
+// Prefixa arquivos de /public com o base path
 const asset = (p: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${p}`;
 
 // WhatsApp: DDI + DDD + número, só dígitos
@@ -9,95 +9,333 @@ const WHATSAPP = "5567998678291";
 const wa = (msg: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 const ctaMsg = "Olá! Gostaria de solicitar um orçamento de pintura.";
 
+const site = "https://jrpintura.com.br";
+const title = "Pintor em Campo Grande - MS | Pintura Residencial e Predial com Orçamento Grátis";
+const description = "Pintura residencial, fachadas e efeitos decorativos em Campo Grande - MS. Equipe própria, proteção de móveis, limpeza pós-obra e visita técnica gratuita. Orçamento pelo WhatsApp.";
+
+const nav = [
+  { href: "#servicos", label: "Serviços" },
+  { href: "#como-funciona", label: "Como funciona" },
+  { href: "#trabalhos", label: "Trabalhos" },
+  { href: "#depoimentos", label: "Depoimentos" },
+  { href: "#duvidas", label: "Dúvidas" },
+];
+
+const services = [
+  {
+    title: "Pintura Interna",
+    tagline: "Casas e apartamentos",
+    swatch: "bg-brand-100",
+    icon: "M3 10.5 12 3l9 7.5V21H3z",
+    items: ["Correção de trincas e massa corrida", "Acabamento liso e uniforme", "Proteção total de móveis e pisos"],
+  },
+  {
+    title: "Fachadas e Prédios",
+    tagline: "Condomínios e comércios",
+    swatch: "bg-paint-300/50",
+    icon: "M4 21V5l8-3 8 3v16M9 21v-6h6v6",
+    items: ["Impermeabilização e textura", "Tintas resistentes a sol e chuva", "Pintura predial em altura"],
+  },
+  {
+    title: "Efeitos Decorativos",
+    tagline: "Ambientes com personalidade",
+    swatch: "bg-stone-200",
+    icon: "M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M18 6l-2.5 2.5m-7 7L6 18",
+    items: ["Textura, grafiato e cimento queimado", "Efeitos metálicos e degradê", "Consultoria de cores inclusa"],
+  },
+];
+
+const stats = [
+  { n: "300+", l: "imóveis pintados" },
+  { n: "4.9★", l: "avaliação dos clientes" },
+  { n: "0 R$", l: "visita técnica" },
+  { n: "100%", l: "equipe própria" },
+];
+
+const steps = [
+  { t: "Chame no WhatsApp", d: "Conte o que precisa e envie fotos, se quiser. Respondemos rápido." },
+  { t: "Visita técnica gratuita", d: "Medimos o local em Campo Grande e indicamos a melhor solução." },
+  { t: "Orçamento fechado", d: "Valor e prazo claros, por escrito. Sem surpresas no fim." },
+  { t: "Pintura e entrega limpa", d: "Protegemos tudo, pintamos e entregamos o ambiente limpo." },
+];
+
 const testimonials = [
   { name: "Carlos M.", role: "Síndico de condomínio", text: "Contratei para a pintura externa do nosso condomínio e o resultado foi impecável. Equipe muito organizada e pontual!" },
   { name: "Juliana S.", role: "Proprietária de residência", text: "Reformaram toda a pintura interna da minha casa em Campo Grande. Trabalho limpo, caprichoso e acabamento perfeito nas paredes." },
   { name: "Roberto A.", role: "Empresário", text: "Profissionais de altíssimo nível. Cumpriram o prazo à risca e o preço foi justo pelo nível de qualidade entregue." },
 ];
 
-const services = [
-  {
-    title: "Pintura Interna",
-    icon: "M3 10.5 12 3l9 7.5V21H3z",
-    items: ["Preparação e correção de paredes", "Acabamento liso e uniforme", "Proteção total de móveis e pisos"],
-  },
-  {
-    title: "Fachadas",
-    icon: "M4 21V5l8-3 8 3v16M9 21v-6h6v6",
-    items: ["Impermeabilização e textura", "Tintas resistentes a sol e chuva", "Pintura predial e condomínios"],
-  },
-  {
-    title: "Efeitos Decorativos",
-    icon: "M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M18 6l-2.5 2.5m-7 7L6 18",
-    items: ["Textura, grafiato e cimento queimado", "Efeitos metálicos e degradê", "Consultoria de cores inclusa"],
-  },
-];
-
 const trust = [
-  { t: "Proteção total dos móveis", icon: "M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z" },
-  { t: "Limpeza pós-obra", icon: "M5 21h14M8 21l1-9h6l1 9M10 12V4h4v8" },
-  { t: "Orçamento sem surpresas", icon: "M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
-  { t: "Pintores verificados", icon: "M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM4 21c0-4 4-6 8-6s8 2 8 6" },
+  { t: "Proteção total dos móveis", d: "Lona e fita em pisos, portas e móveis.", icon: "M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z" },
+  { t: "Limpeza pós-obra", d: "Você recebe o ambiente pronto para usar.", icon: "M5 21h14M8 21l1-9h6l1 9M10 12V4h4v8" },
+  { t: "Orçamento sem surpresas", d: "Preço fechado antes de começar.", icon: "M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
+  { t: "Pintores verificados", d: "Equipe própria, treinada e uniformizada.", icon: "M16 11a4 4 0 1 0-8 0 4 4 0 0 0 8 0zM4 21c0-4 4-6 8-6s8 2 8 6" },
 ];
 
 const faqs = [
-  { q: "Vocês fornecem a tinta ou eu preciso comprar?", a: "Podemos fornecer o orçamento completo com materiais de melhor custo-benefício ou trabalhar com os materiais adquiridos por você." },
+  { q: "Quanto custa pintar uma casa em Campo Grande?", a: "O valor depende da metragem, do estado das paredes e do tipo de tinta. Fazemos a visita técnica gratuita e entregamos um orçamento fechado, sem custos escondidos." },
   { q: "A visita técnica para orçamento é paga?", a: "Não. A visita e a medição no local em Campo Grande são gratuitas e sem compromisso." },
+  { q: "Vocês fornecem a tinta ou eu preciso comprar?", a: "Podemos fornecer o orçamento completo com materiais de melhor custo-benefício ou trabalhar com os materiais adquiridos por você." },
   { q: "Quanto tempo leva para pintar uma casa ou apartamento?", a: "Depende do tamanho do imóvel. Dimensionamos a equipe para entregar no menor prazo possível, sem perder qualidade." },
   { q: "Como fica a limpeza após o término da pintura?", a: "Protegemos pisos e móveis antes de começar e entregamos o ambiente limpo e organizado." },
 ];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HousePainter",
+      name: "JR Pintura",
+      url: site,
+      image: `${site}/obra-1.jpg`,
+      telephone: `+${WHATSAPP}`,
+      areaServed: "Campo Grande - MS",
+      address: { "@type": "PostalAddress", addressLocality: "Campo Grande", addressRegion: "MS", addressCountry: "BR" },
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "300" },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ],
+};
+
+const check = "M5 12.5l4.5 4.5L19 7.5";
 ---
 
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Pintura residencial e predial em Campo Grande - MS. Equipe própria, garantia, pontualidade e visita técnica gratuita. Peça seu orçamento pelo WhatsApp." />
-    <title>Pintura Residencial e Predial em Campo Grande - MS | Orçamento Grátis</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${site}/`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${site}/`} />
+    <meta property="og:image" content={`${site}/obra-1.jpg`} />
+    <meta name="theme-color" content="#0f5a56" />
+    <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="bg-stone-50 text-stone-600 antialiased">
-    <!-- Hero -->
-    <header class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
-      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+  <body class="bg-canvas text-stone-600 antialiased">
+    <!-- Barra de navegação -->
+    <nav class="sticky top-0 z-30 border-b border-stone-200/70 bg-canvas/80 backdrop-blur-md">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+        <a href="#" class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink">
+          <span class="grid h-9 w-9 place-items-center rounded-xl bg-brand-700 text-sm text-white shadow-[var(--shadow-soft)]">JR</span>
+          Pintura
+        </a>
+        <ul class="hidden gap-7 text-sm font-medium md:flex">
+          {nav.map((n) => (
+            <li><a href={n.href} class="text-stone-600 transition-colors hover:text-brand-700">{n.label}</a></li>
+          ))}
+        </ul>
+        <a href={wa(ctaMsg)} class="btn-cta rounded-full bg-paint-500 px-5 py-2.5 text-sm font-bold text-white hover:bg-paint-600">
+          Orçamento grátis
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero: promessa + vitrine visual dos serviços -->
+    <header class="relative overflow-hidden">
+      <div class="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-brand-100/70 blur-3xl"></div>
+      <div class="pointer-events-none absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-paint-300/30 blur-3xl"></div>
+
+      <div class="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 pb-20 pt-12 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
         <div>
-          <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-teal-700">Pintura residencial e predial · Campo Grande - MS</p>
-          <h1 class="text-4xl font-bold tracking-tight text-stone-900 lg:text-5xl">
-            Renove seu imóvel com acabamento perfeito e zero dor de cabeça
+          <p class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-3 py-1 text-xs font-semibold text-brand-700 shadow-[var(--shadow-soft)]">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Atendendo hoje em Campo Grande - MS
+          </p>
+          <h1 class="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
+            Pintor em Campo Grande com <span class="brush">acabamento perfeito</span> e zero dor de cabeça
           </h1>
-          <p class="mt-6 text-lg">Equipe própria, orçamento transparente e limpeza garantida. Visita técnica gratuita, sem taxa de deslocamento.</p>
-          <div class="mt-8 flex flex-wrap items-center gap-6">
-            <a href={wa(ctaMsg)} class="rounded-xl bg-teal-700 px-8 py-4 font-semibold text-white shadow-lg transition-colors hover:bg-teal-800">
-              Solicitar orçamento grátis
+          <p class="mt-6 max-w-xl text-lg leading-relaxed">
+            Pintura residencial, fachadas e efeitos decorativos com equipe própria, preço fechado e limpeza garantida. A visita técnica é gratuita.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href={wa(ctaMsg)} class="btn-cta inline-flex items-center justify-center gap-2 rounded-2xl bg-paint-500 px-8 py-4 text-base font-bold text-white hover:bg-paint-600">
+              Pedir orçamento pelo WhatsApp
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
             </a>
-            <p class="text-sm font-medium text-stone-900"><span class="text-amber-500">★</span> 4.9 em mais de 300 casas pintadas</p>
+            <a href="#servicos" class="inline-flex items-center justify-center rounded-2xl border border-stone-300 bg-white px-6 py-4 font-semibold text-ink transition-all hover:-translate-y-0.5 hover:border-brand-500 hover:text-brand-700 hover:shadow-[var(--shadow-soft)]">
+              Ver serviços
+            </a>
+          </div>
+
+          <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-stone-700">
+            {["Visita grátis", "Preço fechado", "Garantia no serviço"].map((b) => (
+              <li class="flex items-center gap-2">
+                <svg class="h-4 w-4 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d={check} /></svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Vitrine visual -->
+        <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div class="media-frame relative overflow-hidden rounded-[2rem] shadow-[var(--shadow-lift)] ring-1 ring-stone-900/5">
+            <img
+              src={asset("hero-pintura.svg")}
+              alt="Parede sendo pintada com rolo, piso protegido por lona e lata de tinta"
+              width="800"
+              height="1000"
+              fetchpriority="high"
+              class="media-enhance aspect-[4/5] w-full object-cover"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-900/50 via-transparent to-transparent"></div>
+
+            <!-- Serviços sobre a imagem -->
+            <div class="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2 sm:inset-x-5 sm:bottom-5 sm:gap-3">
+              {services.map((s) => (
+                <a href="#servicos" class="group float-card rounded-2xl bg-white/90 p-3 backdrop-blur sm:p-4">
+                  <span class={`swatch-fill grid h-9 w-9 place-items-center rounded-xl ${s.swatch} text-brand-700`}>
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={s.icon} /></svg>
+                  </span>
+                  <span class="mt-2 block text-xs font-bold leading-tight text-ink sm:text-sm">{s.title}</span>
+                  <span class="hidden text-[11px] text-stone-500 sm:block">{s.tagline}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Cartões flutuantes -->
+          <div class="float-card bob absolute -left-4 top-8 hidden rounded-2xl bg-white px-4 py-3 sm:block lg:-left-10">
+            <p class="text-xs font-medium text-stone-500">Avaliação média</p>
+            <p class="text-lg font-extrabold text-ink"><span class="text-paint-500">★★★★★</span> 4.9</p>
+          </div>
+          <div class="float-card bob bob-delay absolute -right-3 top-1/3 hidden rounded-2xl bg-white p-3 sm:block lg:-right-8">
+            <p class="mb-2 text-xs font-medium text-stone-500">Paletas do mês</p>
+            <div class="flex -space-x-2">
+              {["#0f5a56", "#ec8a35", "#e7e0d6", "#a9d7d3", "#57534e"].map((c) => (
+                <span class="h-7 w-7 rounded-full ring-2 ring-white" style={`background:${c}`}></span>
+              ))}
+            </div>
           </div>
         </div>
-        <div class="media-frame relative mx-auto w-full max-w-md overflow-hidden rounded-2xl shadow-xl ring-1 ring-stone-900/10">
-          <img
-            src={asset("hero-pintura.svg")}
-            alt="Ilustração de parede sendo pintada com rolo, piso protegido por lona e lata de tinta"
-            width="800"
-            height="1000"
-            class="media-enhance aspect-[4/5] w-full object-cover"
-          />
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-white/10"></div>
-        </div>
+      </div>
+
+      <!-- Números -->
+      <div class="relative mx-auto max-w-6xl px-6 pb-16">
+        <dl class="grid grid-cols-2 gap-4 rounded-3xl border border-stone-200 bg-white p-6 shadow-[var(--shadow-soft)] md:grid-cols-4 md:p-8">
+          {stats.map((s) => (
+            <div class="text-center">
+              <dt class="text-3xl font-extrabold tracking-tight text-brand-700">{s.n}</dt>
+              <dd class="mt-1 text-sm">{s.l}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </header>
 
-    <!-- Provas sociais -->
-    <section class="bg-white py-20">
+    <!-- Serviços -->
+    <section id="servicos" class="py-20">
       <div class="mx-auto max-w-6xl px-6">
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900">O que dizem nossos clientes</h2>
-        <p class="mt-3">Confiado por síndicos, engenheiros e proprietários exigentes em Campo Grande.</p>
-        <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold uppercase tracking-widest text-paint-600">Serviços de pintura</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Tudo o que seu imóvel precisa, do quarto à fachada</h2>
+        </div>
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {services.map((s) => (
+            <article class="group card-lift flex flex-col rounded-3xl border border-stone-200 bg-white p-8 hover:border-brand-200">
+              <span class={`swatch-fill grid h-14 w-14 place-items-center rounded-2xl ${s.swatch} text-brand-700`}>
+                <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={s.icon} /></svg>
+              </span>
+              <h3 class="mt-6 text-xl font-bold text-ink">{s.title}</h3>
+              <p class="text-sm text-stone-500">{s.tagline}</p>
+              <ul class="mt-5 flex-1 space-y-3">
+                {s.items.map((it) => (
+                  <li class="flex gap-3">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d={check} /></svg>
+                    {it}
+                  </li>
+                ))}
+              </ul>
+              <a href={wa(`Olá! Quero um orçamento de ${s.title}.`)} class="mt-8 inline-flex items-center gap-2 font-bold text-brand-700">
+                Pedir orçamento
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section id="como-funciona" class="bg-brand-900 py-20 text-brand-100">
+      <div class="mx-auto max-w-6xl px-6">
+        <p class="text-sm font-bold uppercase tracking-widest text-paint-400">Como funciona</p>
+        <h2 class="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Do primeiro contato à entrega em 4 passos simples</h2>
+        <ol class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <li class="rounded-3xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-paint-400/50 hover:bg-white/10">
+              <span class="grid h-10 w-10 place-items-center rounded-full bg-paint-500 font-extrabold text-white shadow-[var(--shadow-cta)]">{i + 1}</span>
+              <h3 class="mt-5 text-lg font-bold text-white">{s.t}</h3>
+              <p class="mt-2 text-sm leading-relaxed">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+        <a href={wa(ctaMsg)} class="btn-cta mt-12 inline-flex rounded-2xl bg-paint-500 px-8 py-4 font-bold text-white hover:bg-paint-600">Começar agora pelo WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- Trabalhos -->
+    <section id="trabalhos" class="py-20">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.3fr]">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-widest text-paint-600">Portfólio</p>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Veja de perto o acabamento da nossa equipe</h2>
+            <p class="mt-4 text-lg">Obras reais em Campo Grande. Parede lisa, cantos retos e nenhuma mancha no piso.</p>
+            <a href={wa("Olá! Vi os trabalhos no site e quero um orçamento.")} class="btn-cta mt-8 inline-flex rounded-2xl bg-paint-500 px-7 py-4 font-bold text-white hover:bg-paint-600">Quero esse resultado</a>
+          </div>
+          <div class="grid grid-cols-2 items-start gap-5">
+            <div class="media-frame overflow-hidden rounded-3xl bg-stone-200 shadow-[var(--shadow-lift)] ring-1 ring-stone-900/5">
+              <video
+                src={asset("obra-video.mp4")}
+                controls
+                muted
+                playsinline
+                preload="metadata"
+                poster={asset("obra-1.jpg")}
+                class="media-enhance aspect-[9/16] w-full object-cover"
+              ></video>
+            </div>
+            <div class="media-frame relative mt-12 overflow-hidden rounded-3xl shadow-[var(--shadow-lift)] ring-1 ring-stone-900/5">
+              <img src={asset("obra-1.jpg")} alt="Detalhe de acabamento de pintura em obra em Campo Grande" width="899" height="1599" loading="lazy" class="media-enhance aspect-[9/16] w-full object-cover" />
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-white/10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section id="depoimentos" class="bg-white py-20">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold uppercase tracking-widest text-paint-600">Depoimentos</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Quem contratou, recomenda</h2>
+          <p class="mt-3">Síndicos, engenheiros e proprietários exigentes em Campo Grande.</p>
+        </div>
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
-            <figure class="flex flex-col rounded-2xl border border-stone-200 bg-stone-50 p-8">
-              <p class="text-amber-500" aria-label="5 estrelas">★★★★★</p>
-              <blockquote class="mt-4 flex-1 text-stone-700">“{t.text}”</blockquote>
-              <figcaption class="mt-6">
-                <p class="font-semibold text-stone-900">{t.name}</p>
-                <p class="text-sm">{t.role}</p>
+            <figure class="card-lift flex flex-col rounded-3xl border border-stone-200 bg-canvas p-8">
+              <p class="text-lg text-paint-500" aria-label="5 estrelas">★★★★★</p>
+              <blockquote class="mt-4 flex-1 leading-relaxed text-stone-700">“{t.text}”</blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <span class="grid h-11 w-11 place-items-center rounded-full bg-brand-100 font-bold text-brand-700">{t.name[0]}</span>
+                <span>
+                  <span class="block font-bold text-ink">{t.name}</span>
+                  <span class="block text-sm">{t.role}</span>
+                </span>
               </figcaption>
             </figure>
           ))}
@@ -105,132 +343,104 @@ const faqs = [
       </div>
     </section>
 
-    <!-- Serviços -->
-    <section class="py-20">
-      <div class="mx-auto max-w-6xl px-6">
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900">Nossos serviços</h2>
-        <div class="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {services.map((s) => (
-            <div class="rounded-2xl border border-stone-200 bg-white p-8 transition-colors hover:border-teal-600">
-              <svg class="h-10 w-10 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={s.icon} /></svg>
-              <h3 class="mt-4 text-xl font-semibold text-stone-900">{s.title}</h3>
-              <ul class="mt-4 space-y-2">
-                {s.items.map((it) => (
-                  <li class="flex gap-2"><span class="text-teal-600">✔</span>{it}</li>
-                ))}
-              </ul>
-              <a href={wa(`Olá! Quero um orçamento de ${s.title}.`)} class="mt-6 inline-block font-semibold text-teal-700 hover:text-teal-800">Pedir orçamento →</a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Trabalhos -->
-    <section class="py-20">
-      <div class="mx-auto max-w-6xl px-6">
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900">Nossos trabalhos</h2>
-        <p class="mt-3">Veja de perto o acabamento entregue pela nossa equipe.</p>
-        <div class="mt-10 grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-          <div class="media-frame mx-auto w-full max-w-sm overflow-hidden rounded-2xl bg-stone-200 shadow-xl ring-1 ring-stone-900/10">
-            <video
-              src={asset("obra-video.mp4")}
-              controls
-              muted
-              playsinline
-              preload="metadata"
-              poster={asset("obra-1.jpg")}
-              class="media-enhance aspect-[9/16] w-full object-cover"
-            ></video>
-          </div>
-          <div class="media-frame relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl shadow-xl ring-1 ring-stone-900/10">
-            <img
-              src={asset("obra-1.jpg")}
-              alt="Detalhe de acabamento de pintura"
-              width="899"
-              height="1599"
-              loading="lazy"
-              class="media-enhance aspect-[9/16] w-full object-cover"
-            />
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-900/30 via-transparent to-white/10"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Garantias -->
-    <section class="bg-stone-100 py-12">
-      <div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
+    <section class="py-16">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-4 px-6 sm:grid-cols-2 lg:grid-cols-4">
         {trust.map((t) => (
-          <div class="flex flex-col items-center text-center">
-            <svg class="h-9 w-9 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={t.icon} /></svg>
-            <p class="mt-3 font-semibold text-stone-900">{t.t}</p>
+          <div class="group card-lift flex gap-4 rounded-2xl border border-stone-200 bg-white p-5">
+            <span class="swatch-fill grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d={t.icon} /></svg>
+            </span>
+            <div>
+              <p class="font-bold text-ink">{t.t}</p>
+              <p class="mt-1 text-sm">{t.d}</p>
+            </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-20">
-      <div class="mx-auto max-w-3xl px-6">
-        <h2 class="text-3xl font-bold tracking-tight text-stone-900">Tire suas dúvidas</h2>
-        <div class="mt-8 divide-y divide-stone-200">
-          {faqs.map((f) => (
-            <details class="py-4">
-              <summary class="cursor-pointer font-semibold text-stone-900">{f.q}</summary>
-              <p class="mt-2">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <!-- Formulário -->
     <section id="orcamento" class="px-6 pb-20">
-      <div class="mx-auto max-w-4xl rounded-3xl bg-teal-900 p-8 text-white lg:p-12">
-        <h2 class="text-3xl font-bold tracking-tight">Orçamento rápido</h2>
-        <p class="mt-2 text-teal-100">Três informações e retornamos pelo WhatsApp.</p>
-        <form id="lead" class="mt-8 space-y-6">
+      <div class="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 overflow-hidden rounded-[2rem] bg-brand-800 p-8 text-white shadow-[var(--shadow-lift)] lg:grid-cols-2 lg:p-14">
+        <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-paint-500/25 blur-3xl"></div>
+        <div class="relative">
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Orçamento em 30 segundos</h2>
+          <p class="mt-4 text-lg text-brand-100">Responda 3 perguntas e receba o retorno pelo WhatsApp. Sem compromisso.</p>
+          <ul class="mt-8 space-y-3 text-brand-100">
+            {["Visita técnica gratuita", "Preço fechado por escrito", "Resposta no mesmo dia"].map((b) => (
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-paint-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d={check} /></svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <form id="lead" class="relative space-y-6 rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur">
           <fieldset>
-            <legend class="mb-2 font-semibold">Tipo de imóvel</legend>
-            <div class="flex gap-3" data-group="tipo">
-              <button type="button" data-v="Casa" class="opt rounded-lg border border-teal-600 px-5 py-3 font-medium">Casa</button>
-              <button type="button" data-v="Apartamento" class="opt rounded-lg border border-teal-600 px-5 py-3 font-medium">Apto</button>
+            <legend class="mb-3 font-semibold">Tipo de imóvel</legend>
+            <div class="flex flex-wrap gap-3" data-group="tipo">
+              {["Casa", "Apartamento", "Comércio", "Condomínio"].map((v) => (
+                <button type="button" data-v={v} aria-pressed="false" class="opt rounded-xl border border-white/20 px-4 py-2.5 font-medium transition-colors hover:border-white/60">{v}</button>
+              ))}
             </div>
           </fieldset>
           <fieldset>
-            <legend class="mb-2 font-semibold">Metragem aproximada</legend>
+            <legend class="mb-3 font-semibold">Metragem aproximada</legend>
             <div class="flex flex-wrap gap-3" data-group="area">
               {["Até 50 m²", "50 a 100 m²", "100 a 200 m²", "Mais de 200 m²"].map((a) => (
-                <button type="button" data-v={a} class="opt rounded-lg border border-teal-600 px-5 py-3 font-medium">{a}</button>
+                <button type="button" data-v={a} aria-pressed="false" class="opt rounded-xl border border-white/20 px-4 py-2.5 font-medium transition-colors hover:border-white/60">{a}</button>
               ))}
             </div>
           </fieldset>
           <div>
-            <label for="whats" class="mb-2 block font-semibold">Seu WhatsApp</label>
-            <input id="whats" type="tel" required placeholder="(67) 99999-9999" class="w-full rounded-lg bg-white px-4 py-3 text-stone-900" />
+            <label for="whats" class="mb-3 block font-semibold">Seu WhatsApp</label>
+            <input id="whats" type="tel" required autocomplete="tel" placeholder="(67) 99999-9999" class="w-full rounded-xl bg-white px-4 py-3.5 text-ink outline-none ring-paint-400 transition-shadow focus:ring-4" />
           </div>
-          <button type="submit" class="rounded-xl bg-white px-8 py-4 font-semibold text-teal-900 shadow-lg transition-colors hover:bg-teal-50">
-            Receber orçamento
+          <button type="submit" class="btn-cta w-full rounded-2xl bg-paint-500 px-8 py-4 font-bold text-white hover:bg-paint-600">
+            Receber meu orçamento
           </button>
         </form>
       </div>
     </section>
 
-    <footer class="py-6 text-center text-sm text-stone-500">
-      © {new Date().getFullYear()} Pintura Residencial e Predial · Campo Grande - MS
+    <!-- FAQ -->
+    <section id="duvidas" class="pb-20">
+      <div class="mx-auto max-w-3xl px-6">
+        <h2 class="text-center text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Perguntas frequentes</h2>
+        <div class="mt-10 space-y-3">
+          {faqs.map((f) => (
+            <details class="group rounded-2xl border border-stone-200 bg-white px-6 py-5 shadow-[var(--shadow-soft)] transition-colors open:border-brand-200 hover:border-brand-200">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-ink">
+                {f.q}
+                <span class="faq-icon grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-50 text-xl text-brand-700">+</span>
+              </summary>
+              <p class="mt-3 leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <p class="mt-10 text-center">
+          Ainda com dúvida? <a href={wa("Olá! Tenho uma dúvida sobre pintura.")} class="font-bold text-brand-700 underline decoration-paint-400 decoration-2 underline-offset-4 hover:text-brand-800">Fale direto com o pintor</a>
+        </p>
+      </div>
+    </section>
+
+    <footer class="border-t border-stone-200 py-8 text-center text-sm text-stone-500">
+      © {new Date().getFullYear()} JR Pintura · Pintura residencial e predial em Campo Grande - MS
     </footer>
 
-    <a href={wa(ctaMsg)} aria-label="Falar no WhatsApp" class="fixed bottom-4 right-4 z-10 rounded-full bg-teal-700 px-5 py-3 font-semibold text-white shadow-lg hover:bg-teal-800">WhatsApp</a>
+    <a href={wa(ctaMsg)} aria-label="Falar no WhatsApp" class="btn-cta fixed bottom-5 right-5 z-30 inline-flex items-center gap-2 rounded-full bg-[#25d366] px-5 py-3.5 font-bold text-white shadow-lg hover:bg-[#1ebe5b]">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z" /></svg>
+      WhatsApp
+    </a>
 
     <script is:inline define:vars={{ WHATSAPP }}>
-      // Formulário
       const sel = { tipo: "", area: "" };
       document.querySelectorAll("[data-group]").forEach((g) => {
         const key = g.dataset.group;
         g.querySelectorAll(".opt").forEach((o) => o.addEventListener("click", () => {
-          g.querySelectorAll(".opt").forEach((x) => x.classList.remove("bg-white", "text-teal-900"));
-          o.classList.add("bg-white", "text-teal-900");
+          g.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", "false"));
+          o.setAttribute("aria-pressed", "true");
           sel[key] = o.dataset.v;
         }));
       });
