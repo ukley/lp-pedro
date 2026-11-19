@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
 
+// Prefixa arquivos de /public com o base path (GitHub Pages serve em /lp-pedro/)
+const asset = (p: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${p}`;
+
 // WhatsApp: DDI + DDD + número, só dígitos
 const WHATSAPP = "5567998678291";
 const wa = (msg: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
@@ -71,7 +74,7 @@ const faqs = [
         </div>
         <div class="media-frame relative mx-auto w-full max-w-md overflow-hidden rounded-2xl shadow-xl ring-1 ring-stone-900/10">
           <img
-            src="/hero-pintura.svg"
+            src={asset("hero-pintura.svg")}
             alt="Ilustração de parede sendo pintada com rolo, piso protegido por lona e lata de tinta"
             width="800"
             height="1000"
@@ -131,18 +134,18 @@ const faqs = [
         <div class="mt-10 grid grid-cols-1 items-start gap-8 md:grid-cols-2">
           <div class="media-frame mx-auto w-full max-w-sm overflow-hidden rounded-2xl bg-stone-200 shadow-xl ring-1 ring-stone-900/10">
             <video
-              src="/obra-video.mp4"
+              src={asset("obra-video.mp4")}
               controls
               muted
               playsinline
               preload="metadata"
-              poster="/obra-1.jpg"
+              poster={asset("obra-1.jpg")}
               class="media-enhance aspect-[9/16] w-full object-cover"
             ></video>
           </div>
           <div class="media-frame relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl shadow-xl ring-1 ring-stone-900/10">
             <img
-              src="/obra-1.jpg"
+              src={asset("obra-1.jpg")}
               alt="Detalhe de acabamento de pintura"
               width="899"
               height="1599"
